@@ -30,8 +30,6 @@ def get_apps():
 		):
 			continue
 
-		if app == "frappe":
-			continue
 		app_details = frappe.get_hooks("add_to_apps_screen", app_name=app)
 		if not len(app_details):
 			continue

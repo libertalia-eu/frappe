@@ -8,6 +8,17 @@ app_publisher = "Frappe Technologies"
 app_description = "Full stack web framework with Python, Javascript, MariaDB, Redis, Node"
 app_license = "MIT"
 app_logo_url = "/assets/frappe/images/frappe-framework-logo.svg"
+
+# Desk itself is an entry of the apps screen, so the apps do not have to add a fixed one to their menus.
+add_to_apps_screen = [
+	{
+		"name": app_name,
+		"logo": "/assets/frappe/images/framework.png",
+		"title": "Desk",
+		"route": "/app",
+		"has_permission": "frappe.permissions.check_app_permission",
+	}
+]
 develop_version = "15.x.x-develop"
 
 app_email = "developers@frappe.io"

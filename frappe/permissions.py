@@ -870,6 +870,11 @@ def is_system_user(user: str | None = None) -> bool:
 	return frappe.get_cached_value("User", user or frappe.session.user, "user_type") == "System User"
 
 
+def check_app_permission() -> bool:
+	"""`has_permission` of the Desk entry of the apps screen: only a System Manager who is a System User may open Desk from it."""
+	return is_system_user() and "System Manager" in frappe.get_roles(frappe.session.user)
+
+
 def check_doctype_permission(doctype: str, ptype: str = "read") -> None:
 	"""
 	Designed specfically to override DoesNotExistError in some scenarios.
