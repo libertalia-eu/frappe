@@ -871,8 +871,8 @@ def is_system_user(user: str | None = None) -> bool:
 
 
 def check_app_permission() -> bool:
-	"""`has_permission` of the Desk entry of the apps screen: only a System Manager who is a System User may open Desk from it."""
-	return is_system_user() and "System Manager" in frappe.get_roles(frappe.session.user)
+	"""`has_permission` of the Desk entry of the apps screen: only a System User, who may open /app, sees it."""
+	return is_system_user()
 
 
 def check_doctype_permission(doctype: str, ptype: str = "read") -> None:

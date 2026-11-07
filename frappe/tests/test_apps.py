@@ -17,11 +17,12 @@ class TestApps(FrappeTestCase):
 		user.add_roles(*roles)
 		return user
 
-	def test_desk_entry_is_for_a_system_manager_only(self):
-		self._user("test-apps-manager@example.com", ["System Manager"])
+	def test_desk_entry_is_for_system_users_only(self):
+		self._user("test-apps-desk@example.com", ["System Manager"])
 		self._user("test-apps-user@example.com", ["Blogger"])
+		frappe.db.set_value("Role", "Blogger", "desk_access", 0)
 
-		frappe.set_user("test-apps-manager@example.com")
+		frappe.set_user("test-apps-desk@example.com")
 		self.assertIn("Desk", [app["title"] for app in get_apps()])
 
 		frappe.set_user("test-apps-user@example.com")
